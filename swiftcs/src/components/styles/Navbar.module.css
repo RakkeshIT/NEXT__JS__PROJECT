@@ -1,0 +1,26 @@
+.navbar{
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    border-radius: 10px;
+    background-color: transparent   ;
+    transition: .7s;
+    z-index: 999 !important;
+}
+.navbar.scrolled {
+    background: #050c03 !important; /* Dark background on scroll */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+@media all and (max-width:780px) {
+    .navbar{
+        width: 100%;
+        position: fixed;
+        top: 0px;
+        left: 0;
+        border-radius: 10px;
+        background-color: transparent   ;
+        transition: .7s;
+        transition: .7s;
+    }
+}

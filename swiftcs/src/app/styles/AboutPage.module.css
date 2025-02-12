@@ -1,0 +1,14 @@
+:root{
+    --background : #ffffff;
+    --textColor: #000000;
+}
+
+.Container{
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--background) !important;
+    color: var(--textColor) !important ;
+}

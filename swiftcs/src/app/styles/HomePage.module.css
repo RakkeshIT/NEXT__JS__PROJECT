@@ -1,0 +1,32 @@
+.Container{
+    height: 100vh;
+    max-width: 100%;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: url('../../assets/images/pages/banner-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.Animi{
+    animation: animi 5s infinite alternate ease-in-out ;
+}
+@keyframes animi {
+    0%{
+        transform: translateY(-30px);
+    }
+    100%{
+        transform: translateY(20px);
+    }
+}
+
+/* Mobile Menu */
+@media all and (max-width:650px) {
+    .Container{
+        flex-direction: column;
+        text-align: center;
+        height: 150vh;
+    }
+}
