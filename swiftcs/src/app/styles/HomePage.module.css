@@ -9,6 +9,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    color: #ffffff !important;
 }
 .Animi{
     animation: animi 5s infinite alternate ease-in-out ;

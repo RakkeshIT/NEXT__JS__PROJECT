@@ -7,10 +7,12 @@
     background-color: transparent   ;
     transition: .7s;
     z-index: 999 !important;
+    color: #ffffff !important;
 }
 .navbar.scrolled {
     background: #050c03 !important; /* Dark background on scroll */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #ffffff !important;
   }
 @media all and (max-width:780px) {
     .navbar{

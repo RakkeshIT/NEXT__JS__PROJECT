@@ -40,4 +40,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 # UI Lib --> Tailwind Css
 # Icons --> Licide Icons => npm install lucide-react
 # Animation --> GSAp => npm install gsap
+# MongoDb --> npm install mongodb
+# Mongoose --> npm install mongoose
 
