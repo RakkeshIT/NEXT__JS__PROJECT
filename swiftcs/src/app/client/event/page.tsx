@@ -144,8 +144,6 @@ const EventPage = () => {
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </>
     )

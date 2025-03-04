@@ -42,4 +42,54 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 # Animation --> GSAp => npm install gsap
 # MongoDb --> npm install mongodb
 # Mongoose --> npm install mongoose
+# Typewriter --> npm install react-typical
 
+
+<div className="flex flex-wrap mt-10">
+          <div className='p-4 max-w-sm'>
+            <h1 className='flex justify-center gap-x-2'>
+              <span>Students Event</span>
+              <i className='text-green-500'><Hexagon /></i>
+            </h1>
+            <p>Engaging events where students showcase talent, compete, and learn together.</p>
+            <Link href='' className={`${styles.Link} flex justify-center gap-x-2`}>
+              <span>More</span>
+              <i> <Unlink /></i>
+            </Link>
+          </div>
+          <div className='p-4 max-w-sm'>
+            <h1 className='flex justify-center gap-x-2'>
+              <span>Certifications</span>
+              <i className='text-green-500'><Gem /></i>
+            </h1>
+            <p>Recognized certifications that validate student skills and boost careers.</p>
+            <Link href='' className={`${styles.Link} flex justify-center gap-x-2`}>
+              <span>More</span>
+              <i> <Unlink /></i>
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-wrap mt-10">
+          <div className='p-4 max-w-sm'>
+            <h1 className='flex justify-center gap-x-2'>
+              <span>Medals</span>
+              <i className='text-green-500'><Medal /></i>
+            </h1>
+            <p>Awards for excellence in academics, sports, and activities, inspiring success.</p>
+            <Link href='' className={`${styles.Link} flex justify-center gap-x-2`}>
+              <span>More</span>
+              <i> <Unlink /></i>
+            </Link>
+          </div>
+          <div className='p-4 max-w-sm'>
+            <h1 className='flex justify-center gap-x-2'>
+              <span>Coordinators</span>
+              <i className='text-green-500'><Flame /></i>
+            </h1>
+            <p>Leaders who plan, organize, and ensure smooth event execution.</p>
+            <Link href='' className={`${styles.Link} flex justify-center gap-x-2`}>
+              <span>More</span>
+              <i> <Unlink /></i>
+            </Link>
+          </div>
+        </div>

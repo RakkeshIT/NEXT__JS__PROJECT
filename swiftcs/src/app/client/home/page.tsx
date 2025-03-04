@@ -4,6 +4,7 @@ import Styles from '@/app/styles/HomePage.module.css'
 import master from '@/assets/images/pages/master.png'
 import Image from 'next/image'
 import axios from 'axios'
+import TextTyping from '@/components/Custom/TypeEffect'
 const HomePage = () => {
   const [home, setHome] = useState<any[]>([]);
 
@@ -24,7 +25,7 @@ const HomePage = () => {
       <div className='Text__Section'>
         <h1 className='text-xl md:text-3xl lg:text-5xl font-bold'>Student's Wings of Information Technology</h1>
         {home.map((value)=> (
-          <h3 className='text-xl md:text-2xl lg:text-3xl mt-6 ms-2'>{value.TextOne}</h3>
+          <TextTyping key={value.id} texts={[value.TextOne,value.TextTwo]}/>
         ))}
         {/* Buttons */}
         <div className='homeButton mt-6'>

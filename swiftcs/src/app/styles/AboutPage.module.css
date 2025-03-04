@@ -12,3 +12,56 @@
     background-color: var(--background) !important;
     color: var(--textColor) !important ;
 }
+
+/* 
+.Card{
+    width: 100%;
+    background-color: #eeecec;
+    text-align: center;
+    border: 1px solid #b5f8b5;
+    transition: .5s;
+    border-radius: 7px;
+    padding: 10px 15px;
+    & > h1{
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    & > p{
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    & > .Link{
+        font-weight: bold;
+        color: #20ca09;
+    }
+}
+.Card:hover{
+    transition: .5s;
+    border: 1px solid #9afd9a;
+    box-shadow: 0 0 20px #b5f8b5,
+    0 0 40px #b5f8b5, 0 0 60px #b5f8b5;
+} */
+
+/* Responsiveness */
+@media all and (max-width:1200px) {
+    .Container{
+        height: 150vh;
+        justify-content: center;
+    }
+    .About__Image{
+        display: none;
+    }
+}
+@media all and (max-width:950px) {
+    .Container{
+        height: 200vh;
+    }
+
+}
+@media all and (max-width:800px) {
+    .Container{
+        height: 250vh;
+    }
+
+}

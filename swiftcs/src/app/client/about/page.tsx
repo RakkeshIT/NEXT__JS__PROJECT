@@ -2,28 +2,74 @@ import React from 'react'
 import styles from '@/app/styles/AboutPage.module.css'
 import Image from 'next/image'
 import AboutBanner from '@/assets/images/pages/AboutBanner.png'
+import { Flame, Gem, Hexagon, Medal, Unlink } from 'lucide-react'
+import Link from 'next/link'
+import Card from '@/components/Custom/Card'
 const AboutPage = () => {
   return (
-    <div className={`${styles.Container} p-12` }>
-      <div className='About__Image'>
+    <div className={`${styles.Container} p-12 max-w-7xl mx-auto`}>
+      <div className={styles.About__Image}>
         <Image
           src={AboutBanner}
           alt='About Banner'
           width={500}
           layout='responsive'
           priority
+          className={styles.Image}
         />
       </div>
-      <div className='About__Text w-4/6'>
-        <h1 className='font-bold text-4xl py-5 text-slate-700'>About Page</h1>
-       <ul className='text-justify'>
-        <li>Students Wings for Information Technology (SWIFT) is the annual flagship event of the Computer Science Department, bringing together students to showcase their skills, creativity, and passion for technology.</li>
-        <li>SWIFT is a dynamic platform that features both technical and non-technical events, fostering innovation, collaboration, and competitive spirit.</li>
-        <li>From coding competitions, hackathons, and tech quizzes to artistic challenges, debates, and fun-filled activities, SWIFT offers something for everyone.</li>
-        <li>Our mission is to inspire, educate, and empower students by providing an engaging space to explore new ideas and enhance their problem-solving abilities.</li>
-        <strong>Join us in making SWIFT an unforgettable experience of learning, networking, and excitement! 🚀</strong>
-       </ul>
+      <div className='About__Text w-full md:w-4/6 mx-auto'>
+        <h1 className='font-bold text-4xl py-5 text-slate-700 '>About Page</h1>
+        {/* Create a Cards */}
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 p-4 place-items-center'>
+          <Card
+           customClass='dark:bg-lime-50 rounded-xl shadow-lg hover:shadow-indigo-400/50 transition duration-400 ease-in-out'
+          IconBg='Rounded'
+          border='Indigo'
+          icons={<Hexagon />}
+          title={'Student Event'}
+          description={'Engaging events where students showcase talent, compete, and learn together.'}
+          descriptionClass='text-sm'
+          buttonText={'More'}
+          href={''}
+          />
+            <Card
+           customClass='dark:bg-lime-50 rounded-xl shadow-lg hover:shadow-indigo-400/50 transition duration-400 ease-in-out'
+          IconBg='Rounded'
+          border='Indigo'
+          icons={<Gem />}
+          title={'Certifications'}
+          descriptionClass='text-sm'
+          description={'Recognized certifications that validate student skills and boost careers.'}
+          buttonText={'More'}
+          href={''}
+          />
+          
+            <Card
+           customClass='dark:bg-lime-50 rounded-xl shadow-lg hover:shadow-indigo-400/50 transition duration-400 ease-in-out'
+          IconBg='Rounded'
+          border='Indigo'
+          icons={<Medal />}
+          title={'Medals'}
+          descriptionClass='text-sm'
+          description={'Awards for excellence in academics, sports, and activities, inspiring success.'}
+          buttonText={'More'}
+          href={''}
+          />
+            <Card
+           customClass='dark:bg-lime-50 rounded-xl shadow-lg hover:shadow-indigo-400/50 transition duration-400 ease-in-out'
+          IconBg='Rounded'
+          border='Indigo'
+          icons={<Flame />}
+          title={'Coordinators'}
+          descriptionClass='text-sm'
+          description={'Leaders who plan, organize, and ensure smooth event execution.'}
+          buttonText={'More'}
+          href={''}
+          />
+          </div>
       </div>
+
     </div>
   )
 }
