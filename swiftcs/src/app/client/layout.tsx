@@ -1,13 +1,15 @@
+'use client'
 import Navbar from "@/components/client/Navbar"
-import { ReactNode } from "react"
+import { UseLenis } from "@/hooks/useLenis"
 
-export default function ClientLayout({ children }: { children: ReactNode }) {
+export default function ClientLayout({ children }: { children: React.ReactNode }) {
+    UseLenis();
     return (
-        <>
+        <div>
             <Navbar />
-            <main>
-                {children}
+            <main>  
+                  {children}
             </main>
-        </>
+        </div>
     )
 }

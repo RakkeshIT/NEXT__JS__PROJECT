@@ -1,4 +1,38 @@
-.container{
+.containerMain{
     height: 100vh;
     max-width: 100%;
+}
+.container{
+    height: 70vh;
+    max-width: 100%;
+    background: #FC5C7D;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: flex;
+    align-items: center;
+}
+.EventContainer{
+    height: 200vh;
+    max-width: 100%;
+    background-color: #fff !important;
+}
+
+/* Responsiveness */
+@media all and (max-width:1200px) {
+    .containerMain{
+        height: 250vh;
+        justify-content: center;
+    }
+}
+@media all and (max-width:950px) {
+    .containerMain{
+        height: 200vh;
+    }
+
+}
+@media all and (max-width:800px) {
+    .containerMain{
+        height: 350vh;
+    }
+
 }

@@ -22,10 +22,11 @@ const HomePage = () => {
   }, []);
   return (
     <div className={Styles.Container}>
-      <div className='Text__Section'>
+     <div className={Styles.Contents}>
+     <div className='Text__Section'>
         <h1 className='text-xl md:text-3xl lg:text-5xl font-bold'>Student's Wings of Information Technology</h1>
         {home.map((value)=> (
-          <TextTyping key={value.id} texts={[value.TextOne,value.TextTwo]}/>
+          <TextTyping key={value._id} texts={[value.TextOne,value.TextTwo]}/>
         ))}
         {/* Buttons */}
         <div className='homeButton mt-6'>
@@ -38,14 +39,15 @@ const HomePage = () => {
         </div>
       </div>
       <div className='Image__Section'>
-        <Image
+        {/* <Image
           className={Styles.Animi}
           src={master} alt='Home Image'
           width={500}
           layout='responsive' 
           priority
-          />
+          /> */}
       </div>
+     </div>
     </div>
   )
 }

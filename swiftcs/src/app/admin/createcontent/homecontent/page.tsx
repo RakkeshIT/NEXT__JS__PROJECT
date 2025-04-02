@@ -9,17 +9,16 @@ const HomeContent = () => {
   const [text, setText] = useState('');
   const [textTwo, setTextTwo] = useState('');
   const [store, setStore] = useState<any[]>([]);
-  const [isEnable, setIsEnable] = useState(false);
-  const [isEnableTwo, setIsEnableTwo] = useState(false);
-  // Editing Box Enable
-    const enableEdit = () => {
-      setIsEnable(!isEnable);
-      console.log(isEnable);
-    }
-    const enableEditTwo = () => {
-      setIsEnableTwo(!isEnableTwo);
-      console.log(isEnableTwo);
-    }
+  const [editRow, setEditRow] = useState<string | null>(null);
+  // // Editing Box Enable
+  //   const enableEdit = () => {
+  //     setIsEnable(!isEnable);
+  //     console.log(isEnable);
+  //   }
+  //   const enableEditTwo = () => {
+  //     setIsEnableTwo(!isEnableTwo);
+  //     console.log(isEnableTwo);
+  //   }
   const fetchData = async () => {
      try {
       const response = await axios.get('/api/HomeApi');
@@ -45,6 +44,7 @@ const HomeContent = () => {
       alert("Please Check your Connection")
     }
   }
+  // Delete Function
   const deleteText = async (id:String) => {
     try {
      const response =  await axios.delete('/api/HomeApi', {params: {id}})
@@ -59,13 +59,39 @@ const HomeContent = () => {
       console.log(error);
     }
   }
+  // Update Function
+  const updateText = async(id: string, updatedTextOne:string, updatedTextTwo:string) => {
+    try {
+      const response = await axios.put('/api/HomeApi', {id, TextOne:updatedTextOne,TextTwo:updatedTextTwo});
+      if(response.status === 200){
+        setStore(store.map((item) => (item._id === id ? {...item, TextOne:updatedTextOne,TextTwo:updatedTextTwo }: item)));
+       setEditRow(null);
+        alert("Updated Success")
+      }else{
+        alert("Something wrong")
+      }
+    } catch (error) {
+      console.error(error);
+      
+    }
+  }
+  // Enable Edit
+  const enableEdit = (id: string, initalTextOne: string, initialTextTwo:string) => {
+    setEditRow(id);
+    setText(initalTextOne);
+    setTextTwo(initialTextTwo);
+  }
   // Create a Table Columns
-  const column = ["Id", "Text","TextTwo", "Delete"]
+  const column = ["Id", "Text","TextTwo", "Action"]
   const data = store.map((val,index) => ({
     Id: index + 1,
-    Text: isEnable ? (<EditBox label='Update' value={val.TextOne} onChange={(e)=> setText(e.target.value)}/>) : <span className='cursor-pointer' onClick={enableEdit}>{val.TextOne}</span>,
-    TextTwo:isEnableTwo ? (<EditBox label='Update' value={val.TextTwo} onChange={(e) => setTextTwo(e.target.value)}/>) : <span className='cursor-pointer' onClick={enableEditTwo}>{val.TextTwo}</span>, 
-    Delete: <Button label='Delete' onClick={()=> deleteText(val._id)}/>
+    Text: editRow === val._id ? (<EditBox label='Update' value={text} onChange={(e)=> setText(e.target.value)}/>) : <span className='cursor-pointer' onClick={() => enableEdit(val._id,val.TextOne,val.TextTwo)}>{val.TextOne}</span>,
+
+    TextTwo: editRow === val._id ? (<EditBox label='Update' value={textTwo} onChange={(e) => setTextTwo(e.target.value)}/>) : <span className='cursor-pointer' onClick={() => enableEdit(val._id,val.TextOne,val.TextTwo)}>{val.TextTwo}</span>, 
+    
+    Action: editRow === val._id ? (
+      <Button label='Update' onClick={()=> updateText(val._id, text, textTwo)}/>
+    ): ( <Button label='Delete' onClick={()=> deleteText(val._id)}/>)
   }))
   return (
     <>

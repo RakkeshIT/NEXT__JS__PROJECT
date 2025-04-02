@@ -43,6 +43,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 # MongoDb --> npm install mongodb
 # Mongoose --> npm install mongoose
 # Typewriter --> npm install react-typical
+# Lenis --> npm install @studio-freight/lenis
+# Lottie --> npm install lottie-react
+
 
 
 <div className="flex flex-wrap mt-10">

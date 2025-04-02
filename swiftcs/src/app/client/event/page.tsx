@@ -3,7 +3,7 @@ import Styles from '../../styles/EventPage.module.css'
 const EventPage = () => {
     return (
         <>
-            <div className={Styles.container}>
+            <div className={Styles.containerMain}>
                 <div className="flex flex-wrap justify-center mt-10">
                     {/* card 1 */}
                     <div className="p-4 max-w-sm">

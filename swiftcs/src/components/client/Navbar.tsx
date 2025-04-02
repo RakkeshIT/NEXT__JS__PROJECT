@@ -45,7 +45,7 @@ const toggleButton = () => {
       <div className="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold ">
+          <Link href="/" className={`text-xl font-bold ${Styles.Siwft}`}>
             Swift
           </Link>
 
@@ -64,13 +64,13 @@ const toggleButton = () => {
               About
             </Link>
             <Link
-              href="/services"
+              href="/client/eventpage"
               className=""
             >
-              Events
+              Events Page
             </Link>
             <Link
-              href="/services"
+              href="/client/results"
               className=""
             >
               Results
@@ -82,13 +82,13 @@ const toggleButton = () => {
               Admin
             </Link>
             <Link
-              href="/contact"
+              href="/client/auth/register"
               className=""
             >
               <CircleUser/>
             </Link>
             <Link
-              href="/contact"
+              href="/client/auth/login"
               className=""
             >
               <LogIn/>
