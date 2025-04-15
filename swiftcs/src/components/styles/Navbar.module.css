@@ -1,8 +1,8 @@
 
-@font-face{
+/* @font-face{
     font-family: 'Satisfy';
     src: url('../../../public/Satisfy/Satisfy-Regular.ttf') format('ttf');
-}
+} */
 
 .navbar {
     width: 100%;
@@ -22,7 +22,7 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .Siwft{
-    font-family: 'Satisfy', sans-serif;
+    /* font-family: 'Satisfy', sans-serif; */
 }
 .navbar.scrolled {
     background: #050c03 !important;

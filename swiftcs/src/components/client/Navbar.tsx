@@ -110,46 +110,52 @@ const toggleButton = () => {
      {isopen && (
          <div className="md:hidden">
          <div className="flex flex-col space-y-2 px-4 py-2" >
-           <Link
-             href="/"
-             className=""
-             onClick={()=>setIsopen(false)}
-           >
-             Home
-           </Link>
-           <Link
-             href="/about"
-             className=""
-           >
-             About 
-           </Link>
-           <Link
-              href="/services"
+         <Link
+              href="/"
               className=""
+              onClick={ () => setIsopen(false)}
             >
-              Events
+              Home
             </Link>
             <Link
-              href="/services"
+              href="/client/about/"
               className=""
+              onClick={ () => setIsopen(false)}
+            >
+              About
+            </Link>
+            <Link
+              href="/client/eventpage"
+              className=""
+              onClick={ () => setIsopen(false)}
+            >
+              Events Page
+            </Link>
+            <Link
+              href="/client/results"
+              className=""
+              onClick={ () => setIsopen(false)}
             >
               Results
             </Link>
             <Link
-              href="/services"
+              href="/admin/"
               className=""
+              onClick={ () => setIsopen(false)}
             >
               Admin
             </Link>
             <Link
-              href="/contact"
+              href="/client/auth/register"
               className=""
+              onClick={ () => setIsopen(false)}
             >
               <CircleUser/>
             </Link>
             <Link
-              href="/contact"
+              href="/client/auth/login"
               className=""
+              onClick={ () => setIsopen(false)}
             >
               <LogIn/>
             </Link>
