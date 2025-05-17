@@ -21,18 +21,18 @@ const DashboardLayout = ({ children }: { children: ReactNode; }) => {
     const { user } = useAuthUser();
     const { permissions } = useAuth();
 
-    useEffect(() => {
-        const getPermission = async () => {
-            try {
-                const res = await axios.get('/admin/roles', { withCredentials: true })
-                setRole(res.data);
-            } catch (error) {
-                console.log("Role Not Get");
-                setRole(null)
-            }
-        }
-        getPermission();
-    }, []);
+    // useEffect(() => {
+    //     const getPermission = async () => {
+    //         try {
+    //             const res = await axios.get('/admin/roles', { withCredentials: true })
+    //             setRole(res.data);
+    //         } catch (error) {
+    //             console.log("Role Not Get");
+    //             setRole(null)
+    //         }
+    //     }
+    //     getPermission();
+    // }, []);
 
     const handleLogout = async () => {
         try {
@@ -205,7 +205,7 @@ const DashboardLayout = ({ children }: { children: ReactNode; }) => {
                                             <Link href="/admin/createcontent/createuser" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create User</Link>
                                         </li>
                                         <li>
-                                            <Link href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">User List</Link>
+                                            <Link href="/admin/list/userlist" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">User List</Link>
                                         </li>
                                     </ul>
                                 )}

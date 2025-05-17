@@ -18,11 +18,6 @@ const EventRegister = () => {
             try {
                 const res = await axios.get('/api/events');
                 setGetEvent(res.data)
-                // if(res.status === 200){
-                //     alert("Data Added")
-                // }else{
-                //     alert("Something Wrong")
-                // }
             } catch (error) {
                 console.log("Event is Error");
             }
@@ -76,7 +71,7 @@ const EventRegister = () => {
                                             <label htmlFor="email">Email Address</label>
                                             <input type="email" name="email" value={formData.email} onChange={handleChange} id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="email@domain.com" />
                                         </div>
-                                        <div className="md:col-span-3">
+                                        <div className="md:col-span-2">
                                             <label htmlFor="address">Select Event</label>
                                             <select value={formData.eventname} onChange={handleChange} id="countries_disabled" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" name='eventname'>
                                                 <option value='' disabled>Select Role</option>
@@ -88,6 +83,10 @@ const EventRegister = () => {
                                         <div className="md:col-span-2">
                                             <label htmlFor="roundname">Select Round</label>
                                             <input type="text" name="roundname" value={formData.roundname} onChange={handleChange} id="roundname" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <label htmlFor="roundname">Date</label>
+                                            <input type="text" name="roundname" id="roundname" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                                         </div>
                                         <div className="md:col-span-2">
                                             <label htmlFor="classname">Class</label>
