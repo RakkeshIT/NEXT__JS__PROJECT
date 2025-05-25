@@ -1,59 +1,88 @@
 'use client'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-
+import useAuthUser from '@/hooks/useAuthUser';
+import { useSearchParams } from 'next/navigation';
 const EventRegister = () => {
-     const [getEvent, setGetEvent] = useState<any[]>([]);
-        const [formData, setFormData] = useState<any>({
-            fullname: '',
-            email: '',
-            eventname: '',
-            roundname: '',
-            classname: '',
-            year: '',
-            semester: '',
-        });
-        useEffect(() => {
-            const fetchEvent = async () => {
-                try {
-                    const res = await axios.get('/api/events');
-                    setGetEvent(res.data)
-                    // if(res.status === 200){
-                    //     alert("Data Added")
-                    // }else{
-                    //     alert("Something Wrong")
-                    // }
-                } catch (error) {
-                    console.log("Event is Error");
-                }
+    const { user } = useAuthUser()
+    const [getEvent, setGetEvent] = useState<any[]>([]);
+    const searchParams = useSearchParams()
+    const id = searchParams.get('id')
+    const initialState = {
+        fullname: '',
+        email: '',
+        alteremail: '',
+        eventname: '',
+        roundname: '',
+        classname: '',
+        year: '',
+        semester: '',
+        Result: 'Nill',
+        date: Date,
+    };
+    const [formData, setFormData] = useState<any>(initialState);
+    useEffect(() => {
+        if (user?.email) {
+            setFormData((prev) => ({
+                ...prev,
+                email: user?.email
+            }))
+        }
+    }, [user])
+
+    useEffect(() => {
+        const fetchEvent = async () => {
+            try {
+                const res = await axios.get('/api/events');
+                setGetEvent(res.data)
+            } catch (error) {
+                console.log("Event is Error");
             }
-            fetchEvent()
-        }, [])
-    
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        }
+        fetchEvent()
+    }, [])
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+
+        const { name, value } = e.target;
+
+        if (name === 'eventname') {
+            const selectedEvent = getEvent.find((e) => e.eventname === value)
+            setFormData({
+                ...formData,
+                eventname: value,
+                roundname: selectedEvent?.round || '',
+                date: selectedEvent?.firstround || '',
+            })
+        } else {
             setFormData({
                 ...formData,
                 [e.target.name]: e.target.value
             })
         }
-    
-        const handleSubmit = async (e: React.FormEvent) => {
-            e.preventDefault()
-            try {
-                const res = await axios.post('/api/eventsregister', formData);
-    
-                if(res.status === 200){
-                    alert('Data Submited')
-                }else{
-                    alert('Something Wrong')
-                }
-            } catch (error) {
-                console.log("Error");
-                
+
+
+    }
+
+
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        try {
+            const res = await axios.post('/api/eventsregister', formData);
+
+            if (res.status === 200) {
+                alert('Data Submited')
+            } else {
+                alert('Something Wrong')
             }
+        } catch (error) {
+            console.log("Error");
+
         }
-  return (
-    <>
+    }
+    return (
+        <>
             <div className="min-h-screen p-6 flex items-center justify-center">
                 <div className="container max-w-screen-lg mx-auto">
                     <div>
@@ -65,7 +94,7 @@ const EventRegister = () => {
                                     <p className="font-medium text-lg text-sky-500">Student Details</p>
                                     <p className='text-white'>Please fill out all the fields.</p>
                                 </div>
-    
+
                                 <div className="lg:col-span-2">
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                         <div className="md:col-span-5">
@@ -76,7 +105,11 @@ const EventRegister = () => {
                                             <label htmlFor="email">Email Address</label>
                                             <input type="email" name="email" value={formData.email} onChange={handleChange} id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 text-black" placeholder="email@domain.com" />
                                         </div>
-                                        <div className="md:col-span-3">
+                                        <div className="md:col-span-5">
+                                            <label htmlFor="alteremail">Alter Email Address</label>
+                                            <input type="email" name="alteremail" value={formData.alteremail || ''} onChange={handleChange} id="alteremail" className="h-10 border mt-1 rounded px-4 text-black w-full bg-gray-50" placeholder="email@domain.com" />
+                                        </div>
+                                        <div className="md:col-span-2">
                                             <label htmlFor="address">Select Event</label>
                                             <select value={formData.eventname} onChange={handleChange} id="countries_disabled" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 text-black" name='eventname' >
                                                 <option value='' disabled className='text-black'>Select Role</option>
@@ -88,6 +121,10 @@ const EventRegister = () => {
                                         <div className="md:col-span-2">
                                             <label htmlFor="roundname">Select Round</label>
                                             <input type="text" name="roundname" value={formData.roundname} onChange={handleChange} id="roundname" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 text-black" placeholder="Round I" />
+                                        </div>
+                                        <div className="md:col-span-1">
+                                            <label htmlFor="date">Date</label>
+                                            <input type="text" name="date" value={formData.date} onChange={handleChange} id="date" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 text-black" placeholder="Round I" />
                                         </div>
                                         <div className="md:col-span-2">
                                             <label htmlFor="classname">Class</label>
@@ -103,9 +140,9 @@ const EventRegister = () => {
                                         </div>
                                         <div className="md:col-span-1">
                                             <label htmlFor="semester">Semester</label>
-                                            <input type="text" name="semester" onChange={handleChange} value={formData.semester} id="semester" className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50 text-black"  placeholder="II"/>
+                                            <input type="text" name="semester" onChange={handleChange} value={formData.semester} id="semester" className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50 text-black" placeholder="II" />
                                         </div>
-    
+
                                         <div className="md:col-span-5 text-right">
                                             <div className="inline-flex items-end">
                                                 <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
@@ -121,8 +158,8 @@ const EventRegister = () => {
                         </a> */}
                 </div>
             </div>
-    </>
-  )
+        </>
+    )
 }
 
 export default EventRegister

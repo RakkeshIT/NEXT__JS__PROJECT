@@ -1,45 +1,48 @@
-import jwt from 'jsonwebtoken';
-import { NextRequest , NextResponse} from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET as string;
-const roleBasedRoute: Record<string, string[]> = {
-    SuperAdmin: ['/admin'],
-    User:['/dashboard'],
-    Guest:['/client']
+export function middleware(req: NextRequest) {
+  const token = req.cookies.get("authToken")?.value;
+  const pathname = req.nextUrl.pathname;
+
+  // Define your public (unprotected) routes
+  const PUBLIC_PATHS = [
+    "/",
+    "/client/auth/login",
+    "/client/auth/register",
+  ];
+
+  // Allow public routes without token
+  if (PUBLIC_PATHS.some((path) => pathname.startsWith(path))) {
+    return NextResponse.next();
+  }
+
+  // Redirect to login if no token
+  if (!token) {
+    console.log("❌ No token found. Redirecting to login.");
+    return NextResponse.redirect(new URL("/client/auth/login", req.url));
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
+
+    // Optional: Role-based restriction (customize if needed)
+    // if (pathname.startsWith("/client/admin") && decoded.role !== "admin") {
+    //   return NextResponse.redirect(new URL("/unauthorized", req.url));
+    // }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.log("❌ Invalid token. Redirecting to login.");
+    return NextResponse.redirect(new URL("/client/auth/login", req.url));
+  }
 }
 
-export function middleware(req: NextRequest){
-    const token = req.cookies.get('authToken')?.value || req.headers.get('Authorization')?.replace('Bearer','');
-
-    const pathName = req.nextUrl.pathname;
-
-    if(pathName.startsWith('/client')){
-        return NextResponse.next();
-    }
-
-    if(!token){
-        return NextResponse.redirect(new URL('/client/auth/login',req.url))
-    }
-
-    try {
-        const decoded: any = jwt.verify(token, JWT_SECRET);
-        const userRole = decoded.role;
-
-        if(pathName.startsWith('/client')){
-            return NextResponse.redirect(new URL('/dashboard', req.url))
-        }
-
-        if(roleBasedRoute[userRole]?.some(route=> pathName.startsWith(route))){
-            return NextResponse.next();
-        }
-
-        return NextResponse.redirect(new URL('/client', req.url))
-    } catch (error) {
-        return NextResponse.redirect(new URL('/client/auth/login',req.url))
-    }
-}
-
+// Configure paths that should trigger the middleware
 export const config = {
-    matcher: ['/admin/:path*', '/dashboard/:path*', '/client'],
-    runtime: 'edge',
-}
+  matcher: [
+    "/dashboard/:path*",
+    "/admin/:path*",
+    // Add all your private route prefixes here
+  ],
+};

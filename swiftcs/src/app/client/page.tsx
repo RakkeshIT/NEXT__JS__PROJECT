@@ -7,6 +7,7 @@ import HomePage from "./home/page";
 export default function Client() {
   return (
    <>
+
       <HomePage/>
       <AboutPage/>
       <EventPage/>

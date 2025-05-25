@@ -35,18 +35,23 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-
 # My Dependancies
+
 # UI Lib --> Tailwind Css
+
 # Icons --> Licide Icons => npm install lucide-react
+
 # Animation --> GSAp => npm install gsap
+
 # MongoDb --> npm install mongodb
+
 # Mongoose --> npm install mongoose
+
 # Typewriter --> npm install react-typical
+
 # Lenis --> npm install @studio-freight/lenis
+
 # Lottie --> npm install lottie-react
-
-
 
 <div className="flex flex-wrap mt-10">
           <div className='p-4 max-w-sm'>
@@ -96,3 +101,31 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
             </Link>
           </div>
         </div>
+
+import clientPromise from '@/utils/connect';
+
+import { NextRequest, NextResponse } from "next/server";
+import jwt from 'jsonwebtoken';
+
+export async function authMiddleware(req: NextRequest) {
+try {
+const token = req.cookies.get('authToken')?.value;
+if(!token) return NextResponse.json({message:'Unauthorized'}, {status:401})
+
+        const decoded : any = jwt.verify(token, process.env.JWT_SECRET as string);
+
+        const client = await clientPromise;
+        const db = client.db();
+
+        const user = await db.collection('User').findOne({email: decoded.email})
+
+        if(!user) return NextResponse.json({message: 'User Not Found'}, {status:404})
+
+        const rolesData = await db.collection('Roles').findOne({rolename: user.role})
+
+        return {user, rolesData}
+    } catch (error) {
+        return NextResponse.json({message: 'Authentication is Failed'}, {status:401})
+    }
+
+}

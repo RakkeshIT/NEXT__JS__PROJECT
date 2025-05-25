@@ -63,19 +63,17 @@ const RolesList = () => {
     const selected = roleData.find((role) => role._id === roleId);
     setSelectedRole(selected || null);
     setRolePermissions(selected ? selected.permission : [])
-    setUpdatedPermissions(selected ? selected.permission : [])
+    setUpdatedPermissions(selected ? (Array.isArray(selected.permission) ? selected.permission: [selected.permission]) : [])
     setIsChanged(false)
   }
 
   const togglePermissions = (permission: string) => {
     let updatedList;
-
     if (updatedPermissions.includes(permission)) {
       updatedList = updatedPermissions.filter((perm) => perm !== permission)
     } else {
       updatedList = [...updatedPermissions, permission]
     }
-
     setUpdatedPermissions(updatedList)
     setIsChanged(true)
   }

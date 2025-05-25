@@ -1,18 +1,31 @@
 'use client'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-
+import useAuthUser from '@/hooks/useAuthUser';
 const EventRegister = () => {
+    const { user } = useAuthUser()
     const [getEvent, setGetEvent] = useState<any[]>([]);
     const [formData, setFormData] = useState<any>({
         fullname: '',
         email: '',
+        alteremail:'',
         eventname: '',
         roundname: '',
         classname: '',
         year: '',
         semester: '',
+        Result:'Nill',
+        date: Date,
     });
+    useEffect(() => {
+        if(user?.email){
+            setFormData((prev) => ({
+                ...prev,
+                email: user.email
+            }))
+        }
+    }, [user])
+
     useEffect(() => {
         const fetchEvent = async () => {
             try {
@@ -26,10 +39,22 @@ const EventRegister = () => {
     }, [])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
+        const { name, value } = e.target
+
+        if (name === 'eventname') {
+            const selectedEven = getEvent.find(event => event.eventname === value);
+            setFormData({
+                ...formData,
+                eventname: value,
+                roundname: selectedEven?.round || '',
+                date: selectedEven?.firstround || ''
+            })
+        } else {
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.value
+            })
+        }
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -37,14 +62,14 @@ const EventRegister = () => {
         try {
             const res = await axios.post('/api/eventsregister', formData);
 
-            if(res.status === 200){
+            if (res.status === 200) {
                 alert('Data Submited')
-            }else{
+            } else {
                 alert('Something Wrong')
             }
         } catch (error) {
             console.log("Error");
-            
+
         }
     }
     return (
@@ -60,7 +85,7 @@ const EventRegister = () => {
                                     <p className="font-medium text-lg">Student Details</p>
                                     <p>Please fill out all the fields.</p>
                                 </div>
-    
+
                                 <div className="lg:col-span-2">
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                         <div className="md:col-span-5">
@@ -69,7 +94,11 @@ const EventRegister = () => {
                                         </div>
                                         <div className="md:col-span-5">
                                             <label htmlFor="email">Email Address</label>
-                                            <input type="email" name="email" value={formData.email} onChange={handleChange} id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="email@domain.com" />
+                                            <input type="email" name="email" value={formData.email || ''} onChange={handleChange} id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" readOnly placeholder="email@domain.com" />
+                                        </div>
+                                        <div className="md:col-span-5">
+                                            <label htmlFor="alteremail">Alter Email Address</label>
+                                            <input type="email" name="alteremail" value={formData.alteremail || ''} onChange={handleChange} id="alteremail" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="email@domain.com" />
                                         </div>
                                         <div className="md:col-span-2">
                                             <label htmlFor="address">Select Event</label>
@@ -82,11 +111,12 @@ const EventRegister = () => {
                                         </div>
                                         <div className="md:col-span-2">
                                             <label htmlFor="roundname">Select Round</label>
-                                            <input type="text" name="roundname" value={formData.roundname} onChange={handleChange} id="roundname" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                            <input type="text" name="roundname" value={formData.roundname} onChange={handleChange} readOnly id="roundname" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                                         </div>
                                         <div className="md:col-span-1">
-                                            <label htmlFor="roundname">Date</label>
-                                            <input type="text" name="roundname" id="roundname" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                            <label htmlFor="date">Date</label>
+                                            <input type="text" name="date" id="date" value={formData.date}
+                                                onChange={handleChange} readOnly className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                                         </div>
                                         <div className="md:col-span-2">
                                             <label htmlFor="classname">Class</label>
@@ -104,7 +134,7 @@ const EventRegister = () => {
                                             <label htmlFor="semester">Semester</label>
                                             <input type="text" name="semester" onChange={handleChange} value={formData.semester} id="semester" className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                                         </div>
-    
+
                                         <div className="md:col-span-5 text-right">
                                             <div className="inline-flex items-end">
                                                 <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
@@ -120,7 +150,7 @@ const EventRegister = () => {
                         </a> */}
                 </div>
             </div>
-    
+
         </>
     )
 }

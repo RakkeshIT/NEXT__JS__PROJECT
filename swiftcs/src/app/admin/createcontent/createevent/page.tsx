@@ -1,5 +1,6 @@
 'use client'
 import axios from 'axios';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -11,8 +12,6 @@ const CreateEvent = () => {
         handlername: '',
         round: '',
         firstround: '',
-        secondround: '',
-        thirdround: '',
     };
     const [eventData, setEventData] = useState(initialState);
     const serchParams = useSearchParams()
@@ -25,7 +24,6 @@ const CreateEvent = () => {
                     setEventData(res.data)
                 } catch (error) {
                     console.log("Event is Not Fetched", error);
-
                 }
             }
         }
@@ -42,10 +40,10 @@ const CreateEvent = () => {
         e.preventDefault();
         try {
             if (eventId) {
-               await axios.patch(`/api/events/${eventId}`, {id: eventId, ...eventData})
-               alert("Event Updated")
+                await axios.patch(`/api/events/${eventId}`, { id: eventId, ...eventData })
+                alert("Event Updated")
             } else {
-               await axios.post('/api/events',eventData)
+                await axios.post('/api/events', eventData)
                 alert("Event Added")
             }
             setEventData(initialState);
@@ -56,6 +54,11 @@ const CreateEvent = () => {
     }
     return (
         <>
+            <Link href='/admin/list/eventlist' className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                    Event List
+                </span>
+            </Link>
             <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
                 <div className="mb-5">
                     <label htmlFor="eventname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Name</label>
@@ -73,19 +76,9 @@ const CreateEvent = () => {
                     <label htmlFor="round" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Round</label>
                     <input name='round' type="text" id="round" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: Rakkesh Kumar" required value={eventData.round} onChange={handleChange} />
                 </div>
-                <div className='grid grid-cols-3 gap-6 mb-5'>
-                    <div>
-                        <label htmlFor="firstround" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Round</label>
+                <div className='mb-5'>
+                        <label htmlFor="firstround" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Round Date</label>
                         <input name='firstround' type="date" id="firstround" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={eventData.firstround} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="secondround" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Second Round</label>
-                        <input name='secondround' type="date" id="secondround" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={eventData.secondround} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="thirdround" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Third Round</label>
-                        <input name='thirdround' type="date" id="thirdround" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={eventData.thirdround} onChange={handleChange} />
-                    </div>
                 </div>
                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     {eventId ? <span>Update Event</span> : <span>Create Event</span>}

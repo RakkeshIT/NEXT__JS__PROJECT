@@ -72,7 +72,6 @@ const HomeContent = () => {
       }
     } catch (error) {
       console.error(error);
-      
     }
   }
   // Enable Edit

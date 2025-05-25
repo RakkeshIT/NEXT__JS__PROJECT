@@ -17,7 +17,7 @@ const UserList = () => {
   const [user, setUser] = useState<userlistProps[]>([]);
   const [role, setRole] = useState<roleProps[]>([])
   const [selectedUser, setSelectedUser] = useState<userlistProps | null>(null)
-  const [updateRole, setUpdateRole] = useState<string[]>([])
+  const [updateRole, setUpdateRole] = useState<string>('')
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -38,11 +38,31 @@ const UserList = () => {
     getUser()
     fetchRole()
   }, [])
-
+  const handleCheckboxChange = (rolename: string) => {
+    setUpdateRole((pre) => pre.includes(rolename) ? updateRole.filter((role) => role !== rolename):[...pre, rolename])
+  }
   const handleChange = (userID: string) => {
     const selected = user.find((user) => user._id === userID);
     setSelectedUser(selected || null);
-    setUpdateRole(selected ? selected.role : [])
+    //  setUpdateRole(selected ? (Array.isArray(selected.role)? selected.role: [selected.role]): [])
+    setUpdateRole(selected?.role || '')
+  }
+
+  const handleUpdate = async () => {
+    if(!selectedUser) return;
+
+    try {
+          await axios.put('/api/assignrole', 
+      {
+        userId: selectedUser._id,
+        role: updateRole
+      }
+    )
+    alert("user updated")
+    } catch (error) {
+      console.log("Note Updater",error);
+      
+    }
   }
   return (
     <>
@@ -66,13 +86,13 @@ const UserList = () => {
             <p className='mb-2'>
               <div className='flex  justify-between' key={index}>
                 <div className="flex items-center mb-4">
-                  <input id="default-checkbox" type="checkbox" checked={updateRole.includes(role.rolename)} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                  <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{role.rolename}</label>
+                  <input id={`radio-${role._id}`} type="radio" onChange={() => setUpdateRole(role.rolename)} checked={updateRole === role.rolename} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                  <label htmlFor={`radio-${role._id}`} className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{role.rolename}</label>
                 </div>
               </div>
             </p>
           )}
-        </ul><Button label='Update' /></>
+        </ul><Button label='Update' onClick={handleUpdate} /></>
       )}
 
     </>

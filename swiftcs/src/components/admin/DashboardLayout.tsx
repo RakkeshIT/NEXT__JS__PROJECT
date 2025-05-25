@@ -18,9 +18,8 @@ const DashboardLayout = ({ children }: { children: ReactNode; }) => {
     const [roleDropOpen, setRoleDropOpen] = useState(false)
     const [permissionsDropOpen, setPermissionsDropOpen] = useState(false)
     const [userDropOpen, setUserDropOpen] = useState(false)
-    const { user } = useAuthUser();
-    const { permissions } = useAuth();
-
+    // const { user } = useAuthUser();
+    const { user, permissions, loading } = useAuth();
     // useEffect(() => {
     //     const getPermission = async () => {
     //         try {
@@ -41,6 +40,9 @@ const DashboardLayout = ({ children }: { children: ReactNode; }) => {
         } catch (error) {
 
         }
+    }
+    if (loading) {
+        return <div className="text-white p-4">Loading...</div>; // Wait until permissions loaded
     }
     return (
         <>
@@ -105,7 +107,6 @@ const DashboardLayout = ({ children }: { children: ReactNode; }) => {
                                 </li>
                             )}
                             {permissions.includes('Event Handler') &&
-
                                 (
                                     <li>
                                         <button onClick={() => setEventDropOpen(!eventDropOpen)} className="flex items-center w-full p-2 text-base text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition duration-300">
@@ -172,44 +173,52 @@ const DashboardLayout = ({ children }: { children: ReactNode; }) => {
                                 )
                             }
 
-                            <li>
-                                <button onClick={() => setPermissionsDropOpen(!permissionsDropOpen)} className="flex items-center w-full p-2 text-base text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition duration-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-copy shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-                                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Permission</span>
-                                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                {permissionsDropOpen && (
-                                    <ul id="dropdown" className="py-2 space-y-2">
-                                        <li>
-                                            <Link href="/admin/createcontent/createpermission" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create Permissions</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Permissions List</Link>
-                                        </li>
-                                    </ul>
-                                )}
-                            </li>
-                            <li>
-                                <button onClick={() => setUserDropOpen(!userDropOpen)} className="flex items-center w-full p-2 text-base text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition duration-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-copy shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
-                                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">User</span>
-                                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                {userDropOpen && (
-                                    <ul id="dropdown" className="py-2 space-y-2">
-                                        <li>
-                                            <Link href="/admin/createcontent/createuser" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create User</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/admin/list/userlist" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">User List</Link>
-                                        </li>
-                                    </ul>
-                                )}
-                            </li>
+                            {
+                                permissions.includes('Permission List') && (
+                                    <li>
+                                        <button onClick={() => setPermissionsDropOpen(!permissionsDropOpen)} className="flex items-center w-full p-2 text-base text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-copy shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+                                            <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Permission</span>
+                                            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+                                            </svg>
+                                        </button>
+                                        {permissionsDropOpen && (
+                                            <ul id="dropdown" className="py-2 space-y-2">
+                                                <li>
+                                                    <Link href="/admin/createcontent/createpermission" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create Permissions</Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Permissions List</Link>
+                                                </li>
+                                            </ul>
+                                        )}
+                                    </li>
+                                )
+                            }
+                            {
+                                permissions.includes('User List') && (
+                                    <li>
+                                        <button onClick={() => setUserDropOpen(!userDropOpen)} className="flex items-center w-full p-2 text-base text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-copy shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+                                            <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">User</span>
+                                            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+                                            </svg>
+                                        </button>
+                                        {userDropOpen && (
+                                            <ul id="dropdown" className="py-2 space-y-2">
+                                                <li>
+                                                    <Link href="/admin/createcontent/createuser" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create User</Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/admin/list/userlist" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">User List</Link>
+                                                </li>
+                                            </ul>
+                                        )}
+                                    </li>
+                                )
+                            }
 
                             <li>
                                 <button onClick={() => setRoleDrop(!roleDrop)} className="flex items-center w-full p-2 text-base text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition duration-300">
@@ -230,7 +239,7 @@ const DashboardLayout = ({ children }: { children: ReactNode; }) => {
                                             <Link href="/admin/createcontent/roles/candidatelist" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Candidate List</Link>
                                         </li>
                                         <li>
-                                            <Link href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Handle Event</Link>
+                                            <Link href="/admin/result" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Post Results</Link>
                                         </li>
                                     </ul>
                                 )}

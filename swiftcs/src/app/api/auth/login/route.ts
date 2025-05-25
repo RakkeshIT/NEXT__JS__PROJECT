@@ -25,7 +25,7 @@ export async function POST(req: NextRequest){
         const token = jwt.sign(
             {id: user._id, email:user.email, name:user.name, role: user.role},
             JWT_SECRET,
-            {expiresIn: '1d'}
+            {expiresIn: '1h'}
         )
         const response = NextResponse.json({
             message:'Login Successfull',
@@ -39,9 +39,9 @@ export async function POST(req: NextRequest){
             value:token,
             httpOnly:true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite:'strict',
+            sameSite:'lax',
             path:'/',
-            maxAge:60 * 60 * 24 
+            maxAge:60 * 60  
         })
         return response
         // return NextResponse.json({message:'Login Success Full', token, role: user.role,  name: user.name, email:user.email}, {status:200})

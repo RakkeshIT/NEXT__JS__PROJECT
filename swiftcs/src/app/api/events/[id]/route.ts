@@ -31,8 +31,6 @@ export async function PATCH(req: Request) {
       handlername,
       round,
       firstround,
-      secondround,
-      thirdround,
     } = await req.json();
     if (!id) {
       return NextResponse.json({ message: "ID is Required" }, { status: 400 });
@@ -48,8 +46,6 @@ export async function PATCH(req: Request) {
           handlername,
           round,
           firstround,
-          secondround,
-          thirdround,
         },
       }
     );

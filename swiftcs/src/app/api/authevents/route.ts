@@ -13,7 +13,8 @@ export async function GET(req: NextRequest) {
         const client = await clientPromise;
         const db = client.db();
         const userEmail = token.email;
-        const getEvents = await db.collection('eventregisteration').find({email:userEmail}).toArray();
+        const userId = token._id;
+        const getEvents = await db.collection('eventregisteration').find({email:userEmail}  ).toArray();
         return NextResponse.json({message: 'Event is Fetched', event: getEvents}, {status:200})
     } catch (error) {
         return NextResponse.json({message: 'Event is not Fetched'}, {status:500})

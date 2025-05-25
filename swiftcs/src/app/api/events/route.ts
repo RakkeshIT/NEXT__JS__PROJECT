@@ -11,8 +11,6 @@ interface eventCreateProps {
   handlername: string;
   round: string;
   firstround: Date;
-  secondround: Date;
-  thirdround: Date;
 }
 
 export async function POST(req: Request) {
@@ -23,8 +21,6 @@ export async function POST(req: Request) {
       handlername,
       round,
       firstround,
-      secondround,
-      thirdround,
     }: eventCreateProps = await req.json();
     const data = {
       eventname,
@@ -32,8 +28,6 @@ export async function POST(req: Request) {
       handlername,
       round,
       firstround,
-      secondround,
-      thirdround,
     };
     const client = await clientPromise;
     const db = client.db();

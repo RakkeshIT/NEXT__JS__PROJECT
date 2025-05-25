@@ -24,6 +24,8 @@ const UserDashboard = ({ children }: { children: React.ReactNode }) => {
       console.log("User Logut Fail");
     }
   }
+
+
   return (
     <>
       <div className='bg-white h-full text-black'>
@@ -51,6 +53,9 @@ const UserDashboard = ({ children }: { children: React.ReactNode }) => {
                     <Dropdown label={user?.name} inline>
                       <DropdownItem>
                         <Link href='' onClick={handleLogout}>Logout</Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href=''>Profile</Link>
                       </DropdownItem>
                     </Dropdown>
 
@@ -95,18 +100,18 @@ const UserDashboard = ({ children }: { children: React.ReactNode }) => {
                 )}
               </li>
 
-              <li>
+              {/* <li>
                 <Link href="#" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-violet-500 dark:hover:bg-violet-200 group">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" strokeLinejoin="round" className="lucide lucide-gem text-violet-500"><path d="M6 3h12l4 6-10 13L2 9Z" /><path d="M11 3 8 9l4 13 4-13-3-6" /><path d="M2 9h20" /></svg>
                   <span className="flex-1 ms-3 whitespace-nowrap">Results</span>
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link href="#" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-violet-500 dark:hover:bg-violet-200 group">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" strokeLinejoin="round" className="lucide lucide-log-out text-violet-500"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" /></svg>
                   <span className="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </aside>

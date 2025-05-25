@@ -6,40 +6,40 @@ import Styles from '../styles/Navbar.module.css'
 import gsap from "gsap";
 
 export default function Navbar() {
-    const [isopen, setIsopen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+  const [isopen, setIsopen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-    useEffect(()=> {
-        const handleScroll = () => {
-          if(window.scrollY > 10){
-            setIsScrolled(true)
-          }else{
-            setIsScrolled(false)
-          }
-        }
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
-    useEffect(() => {
-     if(isScrolled){
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+  useEffect(() => {
+    if (isScrolled) {
       gsap.to(".navbar", {
         y: 0,
         opacity: 1,
         duration: 0.5,
         ease: "power1.out",
       });
-     }else{
+    } else {
       gsap.to(".navbar", {
         y: -10,
         opacity: 1,
         duration: 0.5,
         ease: "power1.out",
       });
-     }
-    }, [isScrolled]);
-const toggleButton = () => {
+    }
+  }, [isScrolled]);
+  const toggleButton = () => {
     setIsopen(!isopen)
-}
+  }
   return (
     <nav className={`${Styles.navbar} navbar ${isScrolled ? Styles.scrolled : ''}`}>
       <div className="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
@@ -50,49 +50,55 @@ const toggleButton = () => {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex space-x-8">
-            <Link
+          <div className="hidden md:flex space-x-8 items-center">
+           <div className="flex items-center gap-6">
+             <Link
               href="/"
-              className=""
+              className={`${isScrolled ? Styles.scrolled : ''}${Styles.MenuLinks} hover:underline hover:text-yellow-200 hover:transition-all hover:duration-200 hover:decoration-yellow-200`}
             >
               Home
             </Link>
             <Link
               href="/client/about/"
-              className=""
+              className={`${isScrolled ? Styles.scrolled : ''}${Styles.MenuLinks} hover:underline hover:text-yellow-200 hover:transition-all hover:duration-200 hover:decoration-yellow-200`}
             >
               About
             </Link>
             <Link
               href="/client/eventpage"
-              className=""
+              className={`${isScrolled ? Styles.scrolled : ''}${Styles.MenuLinks} hover:underline hover:text-yellow-200 hover:transition-all hover:duration-200 hover:decoration-yellow-200`}
             >
               Events Page
             </Link>
             <Link
               href="/client/results"
-              className=""
+              className={`${isScrolled ? Styles.scrolled : ''}${Styles.MenuLinks} hover:underline hover:text-yellow-200 hover:transition-all hover:duration-200 hover:decoration-yellow-200`}
             >
               Results
             </Link>
             <Link
               href="/admin/"
-              className=""
+              className={`${isScrolled ? Styles.scrolled : ''}${Styles.MenuLinks} hover:underline hover:text-yellow-200 hover:transition-all hover:duration-200 hover:decoration-yellow-200`}
             >
               Admin
             </Link>
-            <Link
+           </div>
+           <div className="flex items-center gap-2">
+             <Link
               href="/client/auth/register"
-              className=""
+              className={`relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 `}
             >
-              <CircleUser/>
+              <span className="relative px-5 py-0.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                Register
+              </span>
             </Link>
             <Link
               href="/client/auth/login"
-              className=""
+              className=" text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-1 text-center me-2 mb-2"
             >
-              <LogIn/>
+              🤵 Login
             </Link>
+           </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -101,67 +107,67 @@ const toggleButton = () => {
             aria-label="Toggle Menu"
             onClick={toggleButton}
           >
-            {isopen ? <X size={24}/> : <Menu size={24}/>}
+            {isopen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-     {isopen && (
-         <div className="md:hidden">
-         <div className="flex flex-col space-y-2 px-4 py-2" >
-         <Link
+      {isopen && (
+        <div className="md:hidden">
+          <div className="flex flex-col space-y-2 px-4 py-2" >
+            <Link
               href="/"
               className=""
-              onClick={ () => setIsopen(false)}
+              onClick={() => setIsopen(false)}
             >
               Home
             </Link>
             <Link
               href="/client/about/"
               className=""
-              onClick={ () => setIsopen(false)}
+              onClick={() => setIsopen(false)}
             >
               About
             </Link>
             <Link
               href="/client/eventpage"
               className=""
-              onClick={ () => setIsopen(false)}
+              onClick={() => setIsopen(false)}
             >
               Events Page
             </Link>
             <Link
               href="/client/results"
               className=""
-              onClick={ () => setIsopen(false)}
+              onClick={() => setIsopen(false)}
             >
               Results
             </Link>
             <Link
               href="/admin/"
               className=""
-              onClick={ () => setIsopen(false)}
+              onClick={() => setIsopen(false)}
             >
               Admin
             </Link>
             <Link
               href="/client/auth/register"
               className=""
-              onClick={ () => setIsopen(false)}
+              onClick={() => setIsopen(false)}
             >
-              <CircleUser/>
+              <CircleUser />
             </Link>
             <Link
               href="/client/auth/login"
               className=""
-              onClick={ () => setIsopen(false)}
+              onClick={() => setIsopen(false)}
             >
-              <LogIn/>
+              <LogIn />
             </Link>
-         </div>
-       </div>
-     )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
