@@ -24,15 +24,6 @@ const Login = () => {
                 },
                 withCredentials: true
             })
-            // if (res.status === 200) {
-            //     if (res.data.role === "SuperAdmin") {
-            //         router.push('/admin')
-            //     } else if (res.data.role === "user") {
-            //         router.push('/dashboard')
-            //     } else {
-            //         router.push('/client')
-            //     }
-            // }
             if (res.status === 200) {
                 if (res.data.role) {
                     router.push('/dashboard')
