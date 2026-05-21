@@ -8,7 +8,6 @@ export async function GET(req: NextRequest) {
 
       if ('message' in authData) return NextResponse.json(authData, { status: 401 });
 
-
     const {user, rolesData} = authData;
     
     return NextResponse.json({user, permission: rolesData?.permission || []})

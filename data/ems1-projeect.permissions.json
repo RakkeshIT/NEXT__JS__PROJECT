@@ -1,0 +1,54 @@
+[{
+  "_id": {
+    "$oid": "6a0af6b28e016d610345152c"
+  },
+  "name": "Edit Home Text"
+},
+{
+  "_id": {
+    "$oid": "6a0af6b28e016d610345152d"
+  },
+  "name": "Event Handler"
+},
+{
+  "_id": {
+    "$oid": "6a0af6b28e016d610345152e"
+  },
+  "name": "Event Creation"
+},
+{
+  "_id": {
+    "$oid": "6a0af6b28e016d610345152f"
+  },
+  "name": "Event List"
+},
+{
+  "_id": {
+    "$oid": "6a0af6b28e016d6103451530"
+  },
+  "name": "Roles Handlers"
+},
+{
+  "_id": {
+    "$oid": "6a0af6b28e016d6103451531"
+  },
+  "name": "Create Role"
+},
+{
+  "_id": {
+    "$oid": "6a0af6b28e016d6103451532"
+  },
+  "name": "Role List"
+},
+{
+  "_id": {
+    "$oid": "6a0af6b28e016d6103451533"
+  },
+  "name": "Permission List"
+},
+{
+  "_id": {
+    "$oid": "6a0af6b28e016d6103451534"
+  },
+  "name": "User List"
+}]

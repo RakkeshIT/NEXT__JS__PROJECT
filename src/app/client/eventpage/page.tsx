@@ -5,18 +5,16 @@ import Link from 'next/link';
 import axios from 'axios';
 const EventPage = () => {
   const [eventStore, setEventStore] = useState<any[]>([]);
-  
   const fetchEventDetails = async () => {
     try {
       const response = await axios.get('/api/events');
       setEventStore(response.data)
     } catch (error) {
-      console.log("Error in Fetch Event Details ",error);
-      
+      console.log("Error in Fetch Event Details ", error);
     }
   }
   useEffect(() => {
-    
+
     fetchEventDetails();
   }, []);
 

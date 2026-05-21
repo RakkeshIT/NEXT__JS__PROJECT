@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Edit Home Text"
+  },
+  {
+    "name": "Event Handler"
+  },
+  {
+    "name": "Event Creation"
+  },
+  {
+    "name": "Event List"
+  },
+  {
+    "name": "Roles Handlers"
+  },
+  {
+    "name": "Create Role"
+  },
+  {
+    "name": "Role List"
+  },
+  {
+    "name": "Permission List"
+  },
+  {
+    "name": "User List"
+  }
+]

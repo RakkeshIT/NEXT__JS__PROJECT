@@ -14,7 +14,7 @@ const TextTyping: React.FC<TypePropse> = ({ texts }) => {
         delaySpeed: 1500,
     });
     return (
-        <h3 className='text-xl md:text-2xl lg:text-3xl mt-6 ms-2'>
+        <h3 className='text-xl md:text-xl mt-6 ms-2'>
             {text}
             <Cursor cursorColor="cyan" />
         </h3>

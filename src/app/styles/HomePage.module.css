@@ -1,4 +1,4 @@
-.Container{
+.Container {
     height: 100vh;
     max-width: 100%;
     padding: 50px;
@@ -12,7 +12,8 @@
     color: #ffffff !important;
     position: relative;
 }
-.Contents{
+
+.Contents {
     height: 100vh;
     width: 100%;
     position: absolute;
@@ -20,24 +21,27 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background:rgba(31, 30, 30, 0.568);
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.568);
+    backdrop-filter: blur(3px);
 }
-.Animi{
-    animation: animi 5s infinite alternate ease-in-out ;
+
+.Animi {
+    animation: animi 5s infinite alternate ease-in-out;
 }
+
 @keyframes animi {
-    0%{
+    0% {
         transform: translateY(-30px);
     }
-    100%{
+
+    100% {
         transform: translateY(20px);
     }
 }
 
 /* Mobile Menu */
 @media all and (max-width:650px) {
-    .Container{
+    .Container {
         flex-direction: column;
         text-align: center;
         height: 150vh;
