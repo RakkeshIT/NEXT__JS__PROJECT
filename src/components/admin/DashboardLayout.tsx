@@ -548,7 +548,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           border-white/10
           px-6
           py-5
-          pl-96
+          lg:pl-96
           flex
           items-center
           justify-between
@@ -598,7 +598,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         {/* Page Content */}
         <div className="p-6 lg:p-10">
           <div
-            className="
+            className={`
             min-h-[calc(100vh-120px)]
             rounded-[2rem]
             border
@@ -606,8 +606,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             bg-white/5
             backdrop-blur-xl
             p-6
-            ml-80
-          "
+            lg:ml-80
+          `}
           >
             {children}
           </div>
