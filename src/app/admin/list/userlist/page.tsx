@@ -11,7 +11,7 @@ interface userlistProps {
 
 interface roleProps {
   _id: string,
-  rolename: string
+  name: string
 }
 const UserList = () => {
   const [user, setUser] = useState<userlistProps[]>([]);
@@ -38,9 +38,9 @@ const UserList = () => {
     getUser()
     fetchRole()
   }, [])
-  const handleCheckboxChange = (rolename: string) => {
-    setUpdateRole((pre) => pre.includes(rolename) ? updateRole.filter((role) => role !== rolename):[...pre, rolename])
-  }
+  // const handleCheckboxChange = (rolename: string) => {
+  //   setUpdateRole((pre) => pre.includes(rolename) ? updateRole.filter((role) => role !== rolename):[...pre, rolename])
+  // }
   const handleChange = (userID: string) => {
     const selected = user.find((user) => user._id === userID);
     setSelectedUser(selected || null);
@@ -86,7 +86,7 @@ const UserList = () => {
             <p className='mb-2'>
               <div className='flex  justify-between' key={index}>
                 <div className="flex items-center mb-4">
-                  <input id={`radio-${role._id}`} type="radio" onChange={() => setUpdateRole(role.rolename)} checked={updateRole === role.rolename} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                  <input id={`radio-${role._id}`} type="radio" onChange={() => setUpdateRole(role.name)} checked={updateRole === role.name} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                   <label htmlFor={`radio-${role._id}`} className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{role.name}</label>
                 </div>
               </div>

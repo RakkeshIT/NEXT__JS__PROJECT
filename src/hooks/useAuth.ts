@@ -2,9 +2,12 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+interface Props {
+  name: string;
+  role: string;
+}
 export const useAuth = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<Props>(null!);
   const [permissions, setPermissions] = useState<string[]>([]);
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -15,7 +18,7 @@ export const useAuth = () => {
         setPermissions(res.data.permission);
       } catch (error) {
         console.log("User Not Found");
-        setUser(null)
+        setUser(null!)
         setPermissions([])
       }finally{
         setLoading(false)
