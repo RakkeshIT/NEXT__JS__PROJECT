@@ -45,6 +45,11 @@ const Login = () => {
                             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 ✨ Login Your account
                             </h1>
+
+                            <div className='text-white'>
+                                <p>Email: superadmin@gmail.com</p>
+                                <p>Password: 1234567</p>
+                            </div>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">🤵 Email</label>
