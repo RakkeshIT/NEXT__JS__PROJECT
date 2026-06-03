@@ -1,57 +1,227 @@
-# NEXT__JS__PROJECT
-This Repo Was Created by Learn NEXT 
+# 🎓 Event Management System
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A full-stack Event Management System built to streamline and automate college event management processes. The platform provides dedicated dashboards for students and administrators, enabling efficient event registration, approval workflows, participant tracking, and report generation.
 
-## Getting Started
+## 📌 Overview
 
-First, run the development server:
+Managing college events manually often results in inefficiencies, data inconsistencies, and increased administrative workload. This project provides a centralized and secure platform that automates the entire event management lifecycle.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Problem Statement
+
+Traditional event management processes involve manual registration, participant tracking, approval handling, and report generation. These processes are often time-consuming and prone to errors.
+
+---
+
+## 💡 Solution
+
+Developed a web-based Event Management System with:
+
+* Student Dashboard
+* Admin Dashboard
+* Role-Based Access Control (RBAC)
+* Secure Authentication
+* Event Registration Workflow
+* Participant Management
+* Automated Reporting
+
+---
+
+## 🎯 Goal
+
+To provide a scalable, secure, and user-friendly platform for managing college events efficiently while reducing manual administrative effort.
+
+---
+
+## 👨‍💻 My Role
+
+**Full-Stack Developer**
+
+Responsibilities:
+
+* Designed and developed frontend and backend architecture
+* Implemented authentication and authorization
+* Built RESTful APIs
+* Designed MongoDB database schemas
+* Developed admin and student dashboards
+* Integrated PDF report generation
+* Managed deployment and testing
+
+---
+
+## 📅 Project Details
+
+| Field    | Value                      |
+| -------- | -------------------------- |
+| Duration | Feb 2025 – Mar 2025        |
+| Status   | Completed                  |
+| Type     | Full-Stack Web Application |
+
+---
+
+## ✨ Features
+
+### Student Module
+
+* User Registration & Login
+* Secure Authentication
+* Event Browsing
+* Event Registration
+* Registration Status Tracking
+* Profile Management
+
+### Admin Module
+
+* Dashboard Analytics
+* Event Creation & Management
+* Student Approval Workflow
+* Participant Tracking
+* User Management
+* PDF Report Generation
+
+### Security Features
+
+* JWT Authentication
+* NextAuth Integration
+* Password Hashing with bcryptjs
+* Role-Based Access Control (RBAC)
+* Protected Routes
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* Next.js 15
+* React 19
+* Tailwind CSS
+* Flowbite React
+* Axios
+
+### Backend
+
+* Next.js API Routes
+* JWT Authentication
+* NextAuth
+
+### Database
+
+* MongoDB
+* Mongoose
+
+### Security
+
+* bcryptjs
+* JWT
+* Role-Based Access Control (RBAC)
+
+### Utilities
+
+* jsPDF
+
+---
+
+## 🏗️ Architecture
+
+```text
+Student/Admin
+      │
+      ▼
+ Next.js Frontend
+      │
+      ▼
+ API Routes
+      │
+      ▼
+ Authentication Layer
+ (NextAuth + JWT)
+      │
+      ▼
+ MongoDB Database
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔐 Authentication Flow
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. User logs in using credentials.
+2. Password is verified using bcryptjs.
+3. JWT token is generated.
+4. NextAuth manages session handling.
+5. Protected routes are accessible based on user roles.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📊 Key Achievements
 
-To learn more about Next.js, take a look at the following resources:
+* Successfully handled event management workflows.
+* Implemented secure role-based authorization.
+* Automated participant tracking and reporting.
+* Reduced manual administrative processes.
+* Designed scalable database architecture using MongoDB.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📸 Screenshots
 
-## Deploy on Vercel
+Add application screenshots here.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```md
+/screenshots
+├── login.png
+├── dashboard.png
+├── event-list.png
+├── event-registration.png
+└── report-generation.png
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
 
-# My Dependancies
+## ⚙️ Installation
 
-# UI Lib --> Tailwind Css
+```bash
+git clone https://github.com/yourusername/event-management-system.git
 
-# Icons --> Licide Icons => npm install lucide-react
+cd event-management-system
 
-# Animation --> GSAp => npm install gsap
+npm install
 
-# MongoDb --> npm install mongodb
+npm run dev
+```
 
-# Mongoose --> npm install mongoose
+---
 
-# Typewriter --> npm install react-typical
+## 🌐 Environment Variables
 
-# Lenis --> npm install @studio-freight/lenis
+```env
+MONGODB_URI=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+JWT_SECRET=
+```
 
-# Lottie --> npm install lottie-react
+---
+
+## 📈 Future Enhancements
+
+* Email Notifications
+* Event Attendance QR System
+* Certificate Generation
+* Real-Time Notifications
+* Event Feedback Module
+* Multi-College Support
+
+---
+
+## 👤 Author
+
+**Rakkesh Kumar J**
+
+* MERN Stack Developer
+* LinkedIn: https://linkedin.com/in/rakkeshit
+* GitHub: https://github.com/RakkeshIT
+* Portfolio: https://rakkeshaifolio.vercel.app
+
+---
+
+⭐ If you found this project useful, please consider giving it a star.
