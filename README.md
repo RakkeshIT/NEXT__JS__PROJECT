@@ -1,4 +1,5 @@
 # 🎓 Event Management System
+# Live Link - https://next-js-project-omega-smoky.vercel.app/client
 
 A full-stack Event Management System built to streamline and automate college event management processes. The platform provides dedicated dashboards for students and administrators, enabling efficient event registration, approval workflows, participant tracking, and report generation.
 
