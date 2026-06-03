@@ -180,7 +180,7 @@ Add application screenshots here.
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/yourusername/event-management-system.git
+git clone https://github.com/RakkeshIT/NEXT__JS__PROJECT.git
 
 cd event-management-system
 
